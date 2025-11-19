@@ -1,4 +1,5 @@
 import streamlit as st
+from pathlib import Path
 import numpy as np
 import os
 import json
@@ -10,6 +11,7 @@ import tempfile
 import matplotlib.pyplot as plt
 import time
 import cv2
+
 
 # =====================================================
 # CONFIG STREAMLIT
@@ -60,10 +62,11 @@ div.stButton > button {
 # =====================================================
 # CARGAR MODELO Y MAPEOS
 # =====================================================
-model_path = ".\\models\\final_effnetB3_classifier_6classes_14K.keras"
+ROOT = Path(__file__).resolve().parent  # -> streamlit_app/
+model_path = ROOT.parent / "models" / "final_effnetB3_classifier_6classes_14K.keras"
 model = load_model(model_path)
 
-indices_path = ".\\notebooks\\class_indices.json"
+indices_path = ROOT.parent / "notebooks" / "class_indices.json"
 
 with open(indices_path, "r") as f:
     class_indices = json.load(f)
