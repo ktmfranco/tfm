@@ -1,0 +1,31 @@
+# Ignorar ficheros y directorios
+*.pyc
+*.pyo
+__pycache__/
+.eggs/
+.egg-info/
+dist/
+build/
+.tox/
+.local/
+.env
+.env.example
+.env.test
+.env.dev
+.env.prod
+.env.staging
+.venv/
+.env
+.env.example
+.env.test
+.env.dev
+.env.prod
+.env.staging
+.venv/
+
+# Ignorar directorios de paquetes
+env/
+venv/
+.venv/
+data/*
+data_.zip
