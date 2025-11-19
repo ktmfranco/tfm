@@ -15,6 +15,7 @@ import cv2
 
 # =====================================================
 # CONFIG STREAMLIT
+# PRO: https://explicit-content-classifier.streamlit.app/
 # =====================================================
 st.set_page_config(
     page_title="Explicit or illegal content classifier",
@@ -171,23 +172,34 @@ if uploaded_file:
     # IMÁGENES
     # ============================
     if uploaded_file.type.startswith("image"):
+        # Abrir imagen
         img = Image.open(uploaded_file)
+
+        # Convertir a RGB si tiene canal alfa (RGBA, LA, P)
+        if img.mode in ("RGBA", "LA", "P"):
+            img = img.convert("RGB")
+
+        # Mostrar imagen centrada
         col1, col2, col3 = st.columns([1, 2, 1])
         with col2:
             st.image(img, width=350)
 
-        # Guardar temporalmente
-        temp_path = tempfile.NamedTemporaryFile(delete=False, suffix=".jpg")
-        img.save(temp_path.name)
+        # Obtener la extensión original del archivo
+        suffix = os.path.splitext(uploaded_file.name)[1].lower()
 
-        # Crear placeholder
+        # Guardar temporal respetando la extensión original
+        with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as tmp:
+            temp_path = tmp.name
+            img.save(temp_path)
+
+        # Placeholder de estado
         status = st.empty()
         status.info("⏳ Analyzing image...")
 
         # Predicción
-        label, conf, preds = predict_image(temp_path.name)
+        label, conf, preds = predict_image(temp_path)
 
-        # Simular procesamiento
+        # Limpiar mensaje
         status.empty()
 
         # Mostrar resultados
@@ -201,9 +213,11 @@ if uploaded_file:
             unsafe_allow_html=True,
         )
 
+        # Probabilidades por clase
         st.subheader("Probabilities by class:")
         prob_df = {inv_class_indices[i]: float(preds[i]) for i in range(len(preds))}
         st.json(prob_df)
+
 
     # ============================
     # VIDEOS
