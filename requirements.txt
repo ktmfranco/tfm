@@ -1,8 +1,8 @@
 streamlit
-pandas
 numpy
-opencv-python-headless
-tensorflow
+pandas
 matplotlib
 pillow
+tensorflow==2.12.0
+opencv-python-headless==4.10.0.84
 ffmpeg-python
