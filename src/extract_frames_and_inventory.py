@@ -242,6 +242,11 @@ def split_elements_by_ratio(image_paths):
     return {'train': train_imgs, 'val': val_imgs, 'test': test_imgs}
 
 def process(root: Path, csv_out: Path, change_names: bool):
+    ROOT = Path(__file__).resolve().parent  # -> TFM/
+    data = root
+    root = ROOT.parent / data
+    csv_out = root / csv_out
+
     if not root.exists():
         print("No existe el directorio", root)
         return
@@ -249,13 +254,11 @@ def process(root: Path, csv_out: Path, change_names: bool):
     if not root.is_dir():
         print("No es un directorio:", root)
         return
-
-    #concatenar las rutas de root y csv
-    csv_out_tmp = os.path.join(root, csv_out)
+   
     # Si el fichero inventario.csv ya existe, lo borramos
-    if os.path.exists(csv_out_tmp):
-        os.remove(csv_out_tmp)
-
+    if os.path.exists(csv_out):
+        os.remove(csv_out)
+    
     cats = gather_category_files(root, change_names)
     if not cats:
         print("No se encontraron categorías con vídeos ni imágenes en", root)
@@ -297,6 +300,7 @@ def process(root: Path, csv_out: Path, change_names: bool):
                     out_dir = frames_root / split_name
                     ensure_dir(out_dir)
                     out_fname = out_dir / f"frame_{video_base}_{idx+1:06d}.jpg"
+                    relative_path = data / out_fname.relative_to(root)
                     success = extract_frame_at_timestamp(vid_path, ts, out_fname)
                     out_path_str = str(out_fname.resolve()) if success else ""
                     # Guardar fila CSV por cada frame intentado (si falló se registra path vacío)
@@ -306,7 +310,7 @@ def process(root: Path, csv_out: Path, change_names: bool):
                         'filename': vid_path.name,
                         'timestamps_extracted': json.dumps([round(ts, 3)]),  # guardamos el timestamp de este frame como JSON list de 1
                         'output_path': out_path_str,
-                        'relative_path': out_fname,
+                        'relative_path': relative_path,
                         'split': split_name
                     })
                     if success:
@@ -320,19 +324,22 @@ def process(root: Path, csv_out: Path, change_names: bool):
 
         for split_name in SPLITS:
             for img_path in img_splits[split_name]:
+                relative_path = data / img_path.relative_to(root)
                 csv_rows.append({
                     'category': cat_path.name,
                     'source_type': 'image',
                     'filename': img_path.name,
                     'timestamps_extracted': '',
                     'output_path': str(img_path.resolve()),
-                    'relative_path': img_path,
+                    'relative_path': relative_path,
                     'split': split_name
                 })
-    
+
     # Escribir CSV
     ensure_dir(root)
-    with open(f"{root}/{csv_out}", 'w', newline='', encoding='utf-8') as f:
+    
+    with open(f"{csv_out}", 'w', newline='', encoding='utf-8') as f:
+    #with open(f"{root}/{csv_out}", 'w', newline='', encoding='utf-8') as f:
         writer = csv.DictWriter(f, fieldnames=csv_fieldnames)
         writer.writeheader()
         for row in csv_rows:
@@ -348,6 +355,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     
     time_start = time.perf_counter()
+
     process(Path(args.root), Path(args.csv), args.change_names)
 
     # Generar ZIP de data

@@ -6,9 +6,11 @@ import sys
 sys.dont_write_bytecode = True
 
 # ---------------- CONFIG ----------------
-SRC_DIR = Path("data")        # directorio fuente
-DST_DIR = Path("data_")       # copia destino solicitada
-ZIP_NAME = "data_"            # nombre base del .zip resultante -> produces data_.zip
+ROOT = Path(__file__).resolve().parent  # -> src/
+data_path = ROOT.parent 
+SRC_DIR = Path(data_path / "data")        # directorio fuente
+DST_DIR = Path(data_path / "data_")       # copia destino solicitada
+ZIP_NAME =  Path(data_path / "data_")            # nombre base del .zip resultante -> produces data_.zip
 VIDEO_EXTS = {'.mp4', '.mov', '.avi', '.mkv', '.webm', '.mpeg', '.mpg', '.flv', '.ogg', '.3gp', '.ts'}
 # ----------------------------------------
 

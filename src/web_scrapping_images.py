@@ -11,7 +11,7 @@ from pathlib import Path
 #   https://es.images.search.yahoo.com/search/images;_ylt=AwrihPQ1ExNphgIsoLKV.Qt.;_ylu=c2VjA3NlYXJjaARzbGsDYnV0dG9u;_ylc=X1MDMjExNDcxNDAwNQRfcgMyBGZyAwRmcjIDcDpzLHY6aSxtOnNiLXRvcARncHJpZANBX0VBZXZNYlFjYU9SWGhSVFdVNnBBBG5fcnNsdAMwBG5fc3VnZwM4BG9yaWdpbgNlcy5pbWFnZXMuc2VhcmNoLnlhaG9vLmNvbQRwb3MDMARwcXN0cgMEcHFzdHJsAzAEcXN0cmwDOQRxdWVyeQN2aW9sZW5jaWEEdF9zdG1wAzE3NjI4NTc4MjY-?p=violencia&fr=&fr2=p%3As%2Cv%3Ai%2Cm%3Asb-top&ei=UTF-8&x=wrt
 #       class_="sres-cntr"
 #       
-TARGET_URL = "https://es.images.search.yahoo.com/search/images;_ylt=AwrihPTdzhlpVn0ZbS.V.Qt.;_ylu=c2VjA3NlYXJjaARzbGsDYnV0dG9u;_ylc=X1MDMjExNDcxNDAwNQRfcgMyBGZyAwRmcjIDcDpzLHY6aSxtOnNiLXRvcARncHJpZAN0eG1pQVNIc1RLZUxMYjZPMVhMMURBBG5fcnNsdAMwBG5fc3VnZwMxMARvcmlnaW4DZXMuaW1hZ2VzLnNlYXJjaC55YWhvby5jb20EcG9zAzAEcHFzdHIDBHBxc3RybAMwBHFzdHJsAzE5BHF1ZXJ5A3RhcmpldGFzJTIwZGUlMjBjcmVkaXRvBHRfc3RtcAMxNzYzMjk5MDQ1?p=familia&fr=&fr2=p%3As%2Cv%3Ai%2Cm%3Asb-top&ei=UTF-8&x=wrt"
+TARGET_URL = "https://es.images.search.yahoo.com/search/images;_ylt=AwrFEirFlx9pAfYVhaWV.Qt.;_ylu=c2VjA3NlYXJjaARzbGsDYnV0dG9u;_ylc=X1MDMjExNDcxNDAwNQRfcgMyBGZyAwRmcjIDcDpzLHY6aSxtOnNiLXRvcARncHJpZANJd0ZjMkFtaFJfNllnd0dTN0tuNkpBBG5fcnNsdAMwBG5fc3VnZwMwBG9yaWdpbgNlcy5pbWFnZXMuc2VhcmNoLnlhaG9vLmNvbQRwb3MDMARwcXN0cgMEcHFzdHJsAzAEcXN0cmwDMTcEcXVlcnkDanVndWV0ZXMlMjBzZXh1YWxlcwR0X3N0bXADMTc2MzY3ODIyOQ--?p=vibrador&fr=&fr2=p%3As%2Cv%3Ai%2Cm%3Asb-top&ei=UTF-8&x=wrt"
 OUT_DIR    = "images"
 DELAY_BETWEEN = 2.0   # segundos de espera entre descargas
 IMAGE_EXTS = {'.jpg', '.jpeg', '.png', '.bmp', '.gif', '.tiff', '.webp'}

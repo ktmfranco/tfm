@@ -64,7 +64,7 @@ div.stButton > button {
 # CARGAR MODELO Y MAPEOS
 # =====================================================
 ROOT = Path(__file__).resolve().parent  # -> streamlit_app/
-model_path = ROOT.parent / "models" / "final_effnetB3_classifier_6classes_14K.keras"
+model_path = ROOT.parent / "models" / "final_effnetB3_classifier_6classes.keras"
 model = load_model(model_path)
 
 indices_path = ROOT.parent / "notebooks" / "class_indices.json"
