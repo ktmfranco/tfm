@@ -47,3 +47,13 @@ Como panorama general, la moderación de contenido en plataformas modernas es un
 ## Diapositivas
 
 https://www.canva.com/design/DAG7BVztEAo/1LGue7M-ziLO_-mYeefNBQ/edit?utm_content=DAG7BVztEAo&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
+
+**Tecnologías utilizadas:**
+- Maching Learning
+- Deep Learning
+- Redes Neuronales Convolucionales (CNN)
+- Transfer Learning
+- Modelo preentrenado EfficientNetB3
+- Computer Vision
+- FFMPEG
+- Clasificación supervisada multiclase
